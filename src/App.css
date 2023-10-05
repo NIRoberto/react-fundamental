@@ -1,0 +1,77 @@
+/* .card {
+  display: flex;
+  flex-direction: row;
+  background-color: cadetblue;
+  border-radius: 10px;
+  padding: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.Modal {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  right: 20%;
+}
+
+.Modal form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(180, 219, 253);
+  padding: 2rem;
+}
+
+.Modal form div {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgb(22, 22, 22);
+  color: white;
+}
+
+.sidebar {
+  display: flex;
+  padding: 2rem;
+  background-color: rgb(50, 50, 50);
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+.sidebar a {
+  font-size: 2rem;
+  color: white;
+}
+
+.layout {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 5rem 1fr;
+}
+
+.movie_list {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.movieCard img {
+  width: 100%;
+  height: 10rem;
+}

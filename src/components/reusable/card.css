@@ -1,8 +1,12 @@
+.listCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 .card {
   display: flex;
   flex-direction: column;
-
-  background-color: rgb(161, 188, 211);
+  background-color: rgb(141, 165, 185);
   padding: 2rem;
 }
 
