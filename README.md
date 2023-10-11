@@ -26,9 +26,22 @@
 11. Navigation (react-router-dom)
 
 
+## React Router Dom ( All about navigation)
+
+1.  Multiple pages in react
+2.  Link vs NavLink
+3.  Nested Routes, index Routes and 404 pages
+4.  Dynamic Routes with URL parameters
+5.  Programmatic navigation with useNavigate hook
+6.  Redirecting routes
+## Folder organization
+  1.  export components
+  2.  import components
 ## Hook in React 
  1. useState
  2. useEffect
- 3. useContext
+ 3. useContext 
  4. Rules 
- 5. 
+
+
+## Fetching data in React 

@@ -108,3 +108,5 @@ const tours = [
     image: "https://example.com/sunset_dinner.jpg",
   },
 ];
+
+export { tours };
