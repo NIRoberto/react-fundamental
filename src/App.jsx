@@ -1,4 +1,3 @@
-import "./App.css";
 import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Tour from "./pages/Tour";
@@ -6,6 +5,7 @@ import SingleTour from "./pages/SingleTour";
 import Login from "./pages/Login";
 import { tours } from "./utils/data";
 import { createContext, useState } from "react";
+import "./App.css";
 
 const Layout = () => {
   return (
