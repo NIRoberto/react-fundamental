@@ -1,15 +1,35 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TourCard } from "../components/TourCard";
 import { AppContext } from "../App";
-import { tours } from "../utils/data";
+import axios from "axios";
 
 const TourList = () => {
-  const { toursData } = useContext(AppContext);
+  const { tours } = useContext(AppContext);
+
+  // const [click, setClick] = useState("Hello");
+
+  // console.log("render");
+
+  // useEffect(() => {
+  //   console.log("Side effect");
+  // }, [click]);
+
+  //   async/ await
+
+
 
   return (
     <>
       <div className="tours">
-        {toursData.map((item) => {
+        {/* {click}
+        <button
+          onClick={() => {
+            setClick("Hello World");
+          }}
+        >
+          Click me
+        </button> */}
+        {tours.map((item) => {
           return <TourCard key={item.id} tour={item} />;
         })}
       </div>
@@ -17,10 +37,8 @@ const TourList = () => {
   );
 };
 const Tour = () => {
-  const { loggedUser } = useContext(AppContext);
   return (
     <div>
-      <h1>{loggedUser.name}</h1>
       <TourList />
     </div>
   );

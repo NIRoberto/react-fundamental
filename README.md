@@ -20,11 +20,10 @@
 5. Third party libraries (react-icons, react-router-dom, );
 6. State management (difference between props and state, basics of useState hook)
 7. Event handling( click, change )
-8. Conditional rendering 
+8. Conditional rendering
 9. List and keys
 10. Forms ( submit, collecting data from form, validation )
 11. Navigation (react-router-dom)
-
 
 ## React Router Dom ( All about navigation)
 
@@ -34,14 +33,23 @@
 4.  Dynamic Routes with URL parameters
 5.  Programmatic navigation with useNavigate hook
 6.  Redirecting routes
+
 ## Folder organization
-  1.  export components
-  2.  import components
-## Hook in React 
- 1. useState
- 2. useEffect
- 3. useContext 
- 4. Rules 
 
+1.  export components
+2.  import components
 
-## Fetching data in React 
+## Hook in React
+
+1.  useState
+2.  useEffect
+3.  useContext
+4.  Rules
+
+## Fetching data in React
+
+1. useEffect
+2. axios library 
+3. Fetching data with async/await
+4. Fetching data with useContext hook (Review)
+5. React query library

@@ -27,6 +27,13 @@ const NavBar = () => {
         >
           Login
         </button>
+        <button
+          onClick={() => {
+            navigate("/register");
+          }}
+        >
+          Register
+        </button>
       </div>
     </header>
   );

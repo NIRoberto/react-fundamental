@@ -1,29 +1,29 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [input, setInput] = useState({
+    name: "",
     email: "",
     password: "",
   });
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(input);
+
     try {
-      const res = await axios.post(
-        "https://holiday-planner-4lnj.onrender.com/api/v1/auth/login",
+      await axios.post(
+        "https://holiday-planner-4lnj.onrender.com/api/v1/auth/signup",
         input
       );
-      console.log(res.data);
-      localStorage.setItem("isLogin", res.data);
-      alert("login success");
-      navigate("/dashboard");
+
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +33,17 @@ const Login = () => {
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="Email">Email</label>
+          <label htmlFor="name">Names</label>
+          <input
+            type="text"
+            name="name"
+            id="username"
+            onChange={handleChange}
+            value={input.name}
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
             name="email"
@@ -52,10 +62,11 @@ const Login = () => {
             value={input.password}
           />
         </div>
-        <button type="submit">Login</button>
+
+        <button type="submit">Register</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;

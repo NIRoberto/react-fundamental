@@ -1,11 +1,29 @@
 import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
+import {
+  FaHome,
+  FaChartBar,
+  FaUsers,
+  FaCog,
+  FaSignOutAlt,
+} from "react-icons/fa";
+
 import NavBar from "./components/NavBar";
 import Tour from "./pages/Tour";
 import SingleTour from "./pages/SingleTour";
 import Login from "./pages/Login";
 import { tours } from "./utils/data";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.css";
+import Register from "./pages/Register";
+import axios from "axios";
+
+const sidebarLinks = [
+  { to: "/dashboard", icon: <FaHome />, label: "Home" },
+  { to: "tours", icon: <FaChartBar />, label: "Tours" },
+  { to: "users", icon: <FaUsers />, label: "Users" },
+  { to: "bookings", icon: <FaCog />, label: "bookings" },
+  { to: "/", icon: <FaSignOutAlt />, label: "Logout" },
+];
 
 const Layout = () => {
   return (
@@ -16,20 +34,78 @@ const Layout = () => {
   );
 };
 
+const SidebarLink = ({ to, icon, label }) => {
+  return (
+    <Link to={to} className="sidebar-link">
+      {icon}
+      <span>{label}</span>
+    </Link>
+  );
+};
+
+const DashboardLayout = () => {
+  if (!localStorage.getItem("isLogin")) {
+    alert("Login first");
+    window.location.href = "/login";
+  }
+  return (
+    <div className="dashboard">
+      <nav className="dashboard-sidebar">
+        {sidebarLinks.map((link, index) => (
+          <SidebarLink
+            key={index}
+            to={link.to}
+            icon={link.icon}
+            label={link.label}
+          />
+        ))}
+      </nav>
+      <div>
+        <header className="dashboard-header">
+          <h1>Dashboard</h1>
+          <button
+            className="logout"
+            onClick={() => {
+              localStorage.removeItem("isLogin");
+              window.location.href = "/login";
+            }}
+          >
+            logout
+          </button>
+        </header>
+        <main className="dashboard-content">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+};
 export const AppContext = createContext();
 
 function App() {
-  const loggedUser = {
-    name: "Robert",
-  };
-  const [toursData] = useState(tours);
+  let url = "https://holiday-planner-4lnj.onrender.com/api/v1/tour";
 
-  let users = [];
-  let blogs = [];
+  const [tours, setTours] = useState([]);
+
+  const fetch = async () => {
+    try {
+      //   GET, POST , PUT , PATCH, DELETE
+      const result = await axios.get(url);
+      console.log(result.data);
+
+      setTours(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <>
-      <AppContext.Provider value={{ toursData, loggedUser, users, blogs }}>
+      <AppContext.Provider value={{ tours }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -46,6 +122,31 @@ function App() {
                 }
               ></Route>
               <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
+            <Route path="/dashboard/*" element={<DashboardLayout />}>
+              <Route index element={<h1>Home</h1>} />
+              <Route
+                path="tours"
+                element={
+                  <>
+                    <h1>Tours</h1>
+                  </>
+                }
+              />
+              <Route path="users" element={<>users</>} />
+              <Route path="bookings" element={<>bookings</>} />
+
+              <Route
+                path="*"
+                element={
+                  <div>
+                    <h1>Page not found</h1>
+                    <Link to="/">Go back to home</Link>
+                  </div>
+                }
+              ></Route>
+              <Route path="login" element={<Login />} />
             </Route>
           </Routes>
         </BrowserRouter>
