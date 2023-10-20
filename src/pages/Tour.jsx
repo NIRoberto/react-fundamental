@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { TourCard } from "../components/TourCard";
-import { AppContext } from "../App";
-import axios from "axios";
+import { AppContext } from "../context/AppProvider";
 
-const TourList = () => {
+
+export const TourList = () => {
   const { tours } = useContext(AppContext);
 
   // const [click, setClick] = useState("Hello");
@@ -16,21 +16,11 @@ const TourList = () => {
 
   //   async/ await
 
-
-
   return (
     <>
       <div className="tours">
-        {/* {click}
-        <button
-          onClick={() => {
-            setClick("Hello World");
-          }}
-        >
-          Click me
-        </button> */}
-        {tours.map((item) => {
-          return <TourCard key={item.id} tour={item} />;
+        {tours?.map((item) => {
+          return <TourCard key={item._id} tour={item} />;
         })}
       </div>
     </>

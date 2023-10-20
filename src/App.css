@@ -126,10 +126,9 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
-
 }
 
-.logout{
+.logout {
   margin-left: 50%;
   cursor: pointer;
 }
@@ -186,4 +185,12 @@ body {
 
 .sidebar-link.active:hover {
   background-color: #2980b9;
+}
+
+.single {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }

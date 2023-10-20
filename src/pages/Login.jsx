@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppProvider";
 
 const Login = () => {
+  const { loginMutation } = useContext(AppContext);
+
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -11,22 +14,35 @@ const Login = () => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
   const navigate = useNavigate();
+  const { isPending : loginLoading } = loginMutation;
 
+
+  console.log(loginLoading);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(input);
-    try {
-      const res = await axios.post(
-        "https://holiday-planner-4lnj.onrender.com/api/v1/auth/login",
-        input
-      );
-      console.log(res.data);
-      localStorage.setItem("isLogin", res.data);
-      alert("login success");
-      navigate("/dashboard");
-    } catch (error) {
-      console.log(error);
-    }
+    // console.log(input);
+    // try {
+    //   const res = await axios.post(
+    //     "https://holiday-planner-4lnj.onrender.com/api/v1/auth/login",
+    //     input
+    //   );
+    //   console.log(res.data);
+    //   localStorage.setItem("isLogin", res.data);
+    //   alert("login success");
+    //   navigate("/dashboard");
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    loginMutation.mutate(input);
+  };
+
+  const user = {
+    name: "Robert",
+    yearOfBirth: 23,
+    ageCal: function () {
+      return 2021 - this.yearOfBirth;
+    },
   };
 
   return (
@@ -52,7 +68,7 @@ const Login = () => {
             value={input.password}
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">{loginLoading ? "Loading..." : "Login"}</button>
       </form>
     </div>
   );

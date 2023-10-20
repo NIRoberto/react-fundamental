@@ -15,7 +15,9 @@ import { tours } from "./utils/data";
 import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import Register from "./pages/Register";
-import axios from "axios";
+import AppProvider from "./context/AppProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ToursDash from "./pages/ToursDash";
 
 const sidebarLinks = [
   { to: "/dashboard", icon: <FaHome />, label: "Home" },
@@ -62,7 +64,7 @@ const DashboardLayout = () => {
       </nav>
       <div>
         <header className="dashboard-header">
-          <h1>Dashboard</h1>
+          <h1>Robert</h1>
           <button
             className="logout"
             onClick={() => {
@@ -80,32 +82,13 @@ const DashboardLayout = () => {
     </div>
   );
 };
-export const AppContext = createContext();
 
 function App() {
-  let url = "https://holiday-planner-4lnj.onrender.com/api/v1/tour";
-
-  const [tours, setTours] = useState([]);
-
-  const fetch = async () => {
-    try {
-      //   GET, POST , PUT , PATCH, DELETE
-      const result = await axios.get(url);
-      console.log(result.data);
-
-      setTours(result.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetch();
-  }, []);
+  const query = new QueryClient({});
 
   return (
-    <>
-      <AppContext.Provider value={{ tours }}>
+    <QueryClientProvider client={query}>
+      <AppProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -126,14 +109,7 @@ function App() {
             </Route>
             <Route path="/dashboard/*" element={<DashboardLayout />}>
               <Route index element={<h1>Home</h1>} />
-              <Route
-                path="tours"
-                element={
-                  <>
-                    <h1>Tours</h1>
-                  </>
-                }
-              />
+              <Route path="tours" element={<ToursDash />} />
               <Route path="users" element={<>users</>} />
               <Route path="bookings" element={<>bookings</>} />
 
@@ -150,8 +126,8 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </AppContext.Provider>
-    </>
+      </AppProvider>
+    </QueryClientProvider>
   );
 }
 
