@@ -18,10 +18,12 @@ import Register from "./pages/Register";
 import AppProvider from "./context/AppProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ToursDash from "./pages/ToursDash";
+import AddTour from "./pages/AddTour";
 
 const sidebarLinks = [
   { to: "/dashboard", icon: <FaHome />, label: "Home" },
   { to: "tours", icon: <FaChartBar />, label: "Tours" },
+  { to: "tours/add", icon: <FaChartBar />, label: "AddTour" },
   { to: "users", icon: <FaUsers />, label: "Users" },
   { to: "bookings", icon: <FaCog />, label: "bookings" },
   { to: "/", icon: <FaSignOutAlt />, label: "Logout" },
@@ -110,6 +112,7 @@ function App() {
             <Route path="/dashboard/*" element={<DashboardLayout />}>
               <Route index element={<h1>Home</h1>} />
               <Route path="tours" element={<ToursDash />} />
+              <Route path="tours/add" element={<AddTour />} />
               <Route path="users" element={<>users</>} />
               <Route path="bookings" element={<>bookings</>} />
 

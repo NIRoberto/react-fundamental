@@ -17,15 +17,19 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let url = "https://holiday-planner-4lnj.onrender.com/api/v1/auth/signup";
+    // console.log(input);
     try {
-      await axios.post(
-        "https://holiday-planner-4lnj.onrender.com/api/v1/auth/signup",
-        input
-      );
-
-      navigate("/login");
+      //     // await axios({
+      //     //   method: "POST",
+      //     //   url: url,
+      //     //   data: input,
+      //     // });
+      await axios.post(url, input);
+      //     //   navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
+      alert(error.response.data.message);
     }
   };
 
